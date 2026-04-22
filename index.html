@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" href="Utils/brown-heart-removebg-preview.png" type="image/png">
+  <title>Congratulations — Jucil & James</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <canvas class="bubbles-canvas" id="bubblesCanvas"></canvas>
+    <audio id="bgMusic" loop>
+      <source src="Utils/ItMightBeYou.mp3" type="audio/mpeg">
+    </audio>
+
+  <button class="music-toggle" id="musicToggle" title="Toggle music">🔇</button>
+
+  <div class="container">
+
+    <div class="ornament">✦ ✦ ✦</div>
+    <div class="congrats-label">With all our love</div>
+    <div class="script-heading">Congratulations</div>
+    <div class="couple-names">
+      Jucil <span class="ampersand">&amp;</span> James
+    </div>
+    <div class="date-line">May 15, 2026 — Forever Begins</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="photo-row">
+      <div class="photo-frame">
+        <img src="Utils/Jucil&James.jpg" alt="Bride" class="photo-img">
+      </div>
+    </div>
+
+    <div class="message-card">
+      <p>
+        May your love be as timeless as the stars,<br />
+        as warm as golden light at dusk,<br />
+        and as joyful as this very moment.<br />
+        Wishing you a lifetime of laughter,<br />
+        adventures, and quiet beautiful mornings together.
+      </p>
+      <div class="signature">With love &amp; joy</div>
+    </div>
+
+    <div class="countdown-row" id="countdownRow">
+      <div class="count-box">
+        <div class="count-num" id="cd-d">0</div>
+        <div class="count-label">Days</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" id="cd-h">0</div>
+        <div class="count-label">Hours</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" id="cd-m">0</div>
+        <div class="count-label">Mins</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" id="cd-s">0</div>
+        <div class="count-label">Secs</div>
+      </div>
+    </div>
+
+    <button class="celebrate-btn" id="celebrateBtn">🥂 &nbsp; Celebrate with Us</button>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 /* ============================================================
-   Wedding Congratulations Page — Champagne Theme
-   script.js
+   Wedding Congratulations — script.js (upgraded)
    ============================================================ */
 
 /* ---------- Config ---------- */
@@ -8,10 +7,41 @@ const WEDDING_DATE = new Date('May 15, 2026 00:00:00').getTime();
 
 const CONFETTI_COLORS = [
   '#c8a84b', '#d4b860', '#f5e0a0',
-  '#ffffff', '#e8d08a', '#b8922e', '#f0c040'
+  '#ffffff', '#e8d08a', '#b8922e', '#f0c040',
+  '#ffe5a0', '#ffd700'
 ];
 
-const SPARKLE_SYMBOLS = ['✦', '✧', '⋆', '★', '✸', '✺'];
+const SPARKLE_SYMBOLS = ['✦', '✧', '⋆', '★', '✸', '✺', '✼', '❋', '⚘'];
+
+/* ============================================================
+   GOLD DUST PARTICLES
+   ============================================================ */
+(function spawnGoldDust() {
+  const container = document.getElementById('goldDust');
+  const count = 28;
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'dust-particle';
+
+    const size  = 1.5 + Math.random() * 3;
+    const delay = (Math.random() * 10).toFixed(2) + 's';
+    const dur   = (6 + Math.random() * 8).toFixed(2) + 's';
+
+    p.style.cssText = [
+      `width: ${size}px`,
+      `height: ${size}px`,
+      `left: ${Math.random() * 100}vw`,
+      `top: ${Math.random() * 100}vh`,
+      `--dur: ${dur}`,
+      `--delay: ${delay}`,
+      `animation-delay: ${delay}`,
+      `animation-duration: ${dur}`
+    ].join('; ');
+
+    container.appendChild(p);
+  }
+})();
 
 /* ============================================================
    COUNTDOWN TIMER
@@ -27,9 +57,10 @@ function updateCountdown() {
   const diff = WEDDING_DATE - now;
 
   if (diff <= 0) {
-    /* Wedding has passed — show days married */
     const firstBox = countdownRow.querySelector('.count-box:first-child .count-label');
-    if (firstBox) firstBox.textContent = 'Days Married';
+    if (firstBox && firstBox.textContent !== 'Days Married') {
+      firstBox.textContent = 'Days Married';
+    }
 
     const elapsed = Math.abs(diff);
     cdDays.textContent  = Math.floor(elapsed / 86400000);
@@ -62,14 +93,13 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-/* Seed bubbles spread across the full height */
-for (let i = 0; i < 28; i++) {
+for (let i = 0; i < 32; i++) {
   bubbles.push({
     x:           Math.random() * window.innerWidth,
     y:           Math.random() * window.innerHeight + window.innerHeight,
-    r:           3 + Math.random() * 7,
-    speed:       0.3 + Math.random() * 0.7,
-    opacity:     0.12 + Math.random() * 0.18,
+    r:           2.5 + Math.random() * 8,
+    speed:       0.25 + Math.random() * 0.65,
+    opacity:     0.1 + Math.random() * 0.2,
     wobble:      Math.random() * Math.PI * 2,
     wobbleSpeed: 0.005 + Math.random() * 0.01
   });
@@ -81,15 +111,13 @@ function animateBubbles() {
   bubbles.forEach(b => {
     b.y      -= b.speed;
     b.wobble += b.wobbleSpeed;
-    const x = b.x + Math.sin(b.wobble) * 18;
+    const x = b.x + Math.sin(b.wobble) * 20;
 
-    /* Respawn at bottom when off-screen */
     if (b.y < -20) {
       b.y = canvas.height + 20;
       b.x = Math.random() * canvas.width;
     }
 
-    /* Bubble outline */
     ctx.beginPath();
     ctx.arc(x, b.y, b.r, 0, Math.PI * 2);
     ctx.strokeStyle = `rgba(200,168,75,${b.opacity})`;
@@ -98,8 +126,8 @@ function animateBubbles() {
 
     /* Highlight glint */
     ctx.beginPath();
-    ctx.arc(x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.2, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.8})`;
+    ctx.arc(x - b.r * 0.32, b.y - b.r * 0.32, b.r * 0.22, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${b.opacity * 0.9})`;
     ctx.fill();
   });
 
@@ -109,74 +137,74 @@ function animateBubbles() {
 animateBubbles();
 
 /* ============================================================
-   CELEBRATE BUTTON — Confetti + Sparkles
+   CELEBRATE BUTTON
    ============================================================ */
 document.getElementById('celebrateBtn').addEventListener('click', function () {
   launchConfetti();
   launchSparkles();
 
-  this.innerHTML = '🎉 Cheers!';
-  setTimeout(() => { this.innerHTML = '🥂 &nbsp; Celebrate with Us'; }, 2500);
+  this.innerHTML = '🎉 &nbsp; Cheers to the Couple!';
+  setTimeout(() => { this.innerHTML = '🥂 &nbsp; Celebrate with Us'; }, 3000);
 });
 
 function launchConfetti() {
-  const count = 90;
+  const count = 120;
 
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
       const el    = document.createElement('div');
       el.className = 'confetti-piece';
 
-      const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
-      const dur   = (1.8 + Math.random() * 1.6).toFixed(2) + 's';
-      const spin  = (Math.random() * 720 - 360).toFixed(0) + 'deg';
-      const w     = 6  + Math.random() * 6;
-      const h     = 6  + Math.random() * 8;
+      const color  = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+      const dur    = (1.8 + Math.random() * 1.8).toFixed(2) + 's';
+      const spin   = (Math.random() * 720 - 360).toFixed(0) + 'deg';
+      const w      = 5  + Math.random() * 8;
+      const h      = 5  + Math.random() * 10;
       const isPill = Math.random() > 0.5;
 
       el.style.cssText = [
-        `left: ${10 + Math.random() * 80}vw`,
-        `top: -10px`,
+        `left: ${5 + Math.random() * 90}vw`,
+        `top: -12px`,
         `background: ${color}`,
         `--dur: ${dur}`,
         `--spin: ${spin}`,
         `border-radius: ${isPill ? '50%' : '2px'}`,
         `width: ${w}px`,
-        `height: ${h}px`
+        `height: ${h}px`,
+        `opacity: 0.9`
       ].join('; ');
 
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 3400);
-    }, i * 18);
+      setTimeout(() => el.remove(), 3600);
+    }, i * 15);
   }
 }
 
 function launchSparkles() {
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 22; i++) {
     setTimeout(() => {
       const el    = document.createElement('div');
       el.className = 'sparkle';
       el.textContent = SPARKLE_SYMBOLS[Math.floor(Math.random() * SPARKLE_SYMBOLS.length)];
 
-      el.style.left  = (5 + Math.random() * 90) + 'vw';
-      el.style.top   = (5 + Math.random() * 40) + 'vh';
-      el.style.color = CONFETTI_COLORS[Math.floor(Math.random() * 3)];
-      el.style.animationDuration = (2 + Math.random() * 1.5).toFixed(1) + 's';
+      el.style.left  = (3 + Math.random() * 94) + 'vw';
+      el.style.top   = (3 + Math.random() * 50) + 'vh';
+      el.style.color = CONFETTI_COLORS[Math.floor(Math.random() * 4)];
+      el.style.fontSize = (12 + Math.random() * 14) + 'px';
+      el.style.animationDuration = (2 + Math.random() * 1.8).toFixed(1) + 's';
 
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 3000);
-    }, i * 70);
+      setTimeout(() => el.remove(), 3200);
+    }, i * 60);
   }
 }
 
 /* ============================================================
-   MUSIC TOGGLE — Web Audio API (no external file needed)
+   MUSIC TOGGLE
    ============================================================ */
-
-let muted = true;
-
+let muted   = true;
 const musicBtn = document.getElementById('musicToggle');
-const audio = document.getElementById('bgMusic');
+const audio    = document.getElementById('bgMusic');
 
 musicBtn.addEventListener('click', () => {
   muted = !muted;
@@ -186,8 +214,7 @@ musicBtn.addEventListener('click', () => {
     musicBtn.textContent = '🔇';
   } else {
     audio.volume = 0.2;
-    audio.play();
+    audio.play().catch(() => {});
     musicBtn.textContent = '🎵';
   }
 });
-

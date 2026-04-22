@@ -3,45 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <link rel="icon" href="Utils/brown-heart-removebg-preview.png" type="image/png">
-  <title>Congratulations — Jucil & James</title>
+  <link rel="icon" href="Utils/brown-heart-removebg-preview.png" type="image/png">
+  <title>Congratulations — James & Jucil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <canvas class="bubbles-canvas" id="bubblesCanvas"></canvas>
-    <audio id="bgMusic" loop>
-      <source src="Utils/ItMightBeYou.mp3" type="audio/mpeg">
-    </audio>
+
+  <!-- Gold dust particles overlay -->
+  <div class="gold-dust" id="goldDust"></div>
+
+  <audio id="bgMusic" loop>
+    <source src="Utils/ItMightBeYou.mp3" type="audio/mpeg">
+  </audio>
 
   <button class="music-toggle" id="musicToggle" title="Toggle music">🔇</button>
 
-  <div class="container">
-
-    <div class="ornament">✦ ✦ ✦</div>
-    <div class="congrats-label">With all our love</div>
-    <div class="script-heading">Congratulations</div>
-    <div class="couple-names">
-      Jucil <span class="ampersand">&amp;</span> James
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="hero-top-ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-icon">❧</span>
+      <span class="ornament-line"></span>
     </div>
-    <div class="date-line">May 15, 2026 — Forever Begins</div>
+
+    <div class="congrats-label">With all our love &amp; joy</div>
+    <h1 class="script-heading">Congratulations</h1>
+
+    <div class="couple-names">
+      James <span class="ampersand">&amp;</span> Jucil
+    </div>
+    <div class="date-line">May 15, 2026 &nbsp;·&nbsp; Forever Begins</div>
 
     <div class="divider">
       <div class="divider-line"></div>
       <div class="divider-diamond"></div>
+      <div class="divider-diamond small"></div>
+      <div class="divider-diamond"></div>
       <div class="divider-line"></div>
     </div>
 
-    <div class="photo-row">
-      <div class="photo-frame">
-        <img src="Utils/Jucil&James.jpg" alt="Bride" class="photo-img">
+    <!-- HERO IMAGE — large on mobile too -->
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-border">
+        <img src="Utils/Jucil&James.jpg" alt="James & Jucil" class="hero-photo-img" />
+        <div class="hero-photo-overlay"></div>
       </div>
+      <!-- decorative corner flourishes -->
+      <span class="corner tl">✦</span>
+      <span class="corner tr">✦</span>
+      <span class="corner bl">✦</span>
+      <span class="corner br">✦</span>
     </div>
+    
 
+  <!-- ===== MESSAGE SECTION ===== -->
+  <section class="message-section">
     <div class="message-card">
+      <div class="quote-mark open">"</div>
       <p>
         May your love be as timeless as the stars,<br />
         as warm as golden light at dusk,<br />
@@ -49,9 +72,14 @@
         Wishing you a lifetime of laughter,<br />
         adventures, and quiet beautiful mornings together.
       </p>
+      <div class="quote-mark close">"</div>
       <div class="signature">With love &amp; joy</div>
     </div>
+  </section>
 
+  <!-- ===== COUNTDOWN SECTION ===== -->
+  <section class="countdown-section">
+    <div class="section-label">Days Together</div>
     <div class="countdown-row" id="countdownRow">
       <div class="count-box">
         <div class="count-num" id="cd-d">0</div>
@@ -70,10 +98,58 @@
         <div class="count-label">Secs</div>
       </div>
     </div>
+  </section>
 
+  <!-- ===== COLLAGE SECTION ===== -->
+  <!-- <section class="collage-section">
+    <div class="section-heading-wrap">
+      <div class="section-ornament">✦</div>
+      <h2 class="section-heading">Our Story in Frames</h2>
+      <div class="section-ornament">✦</div>
+    </div>
+
+    <div class="collage-grid">
+      <div class="collage-cell large" data-label="Together">
+        <img src="Utils/beach.jpg" alt="James & Jucil" />
+        <div class="collage-caption">James &amp; Jucil</div>
+      </div>
+      <div class="collage-cell medium" data-label="Love">
+        <img src="Utils/cover.jpg" alt="Photo 2" />
+        <div class="collage-caption">Our Beginning</div>
+      </div>
+
+      <div class="collage-cell medium" data-label="Joy">
+        <img src="Utils/happy.jpg" alt="Photo 3" />
+        <div class="collage-caption">Pure Joy</div>
+      </div>
+      <div class="collage-cell small" data-label="✦">
+        <img src="Utils/shades.jpg" alt="Photo 4" />
+        <div class="collage-caption">Adventure</div>
+      </div>
+
+      <div class="collage-cell small" data-label="✦">
+        <img src="Utils/polo.jpg" alt="Photo 5" />
+        <div class="collage-caption">Laughter</div>
+      </div>
+      <div class="collage-cell small" data-label="✦">
+        <img src="Utils/polo.jpg" alt="Photo 5" />
+        <div class="collage-caption">Laughter</div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ===== TOAST / CELEBRATE SECTION ===== -->
+  <section class="toast-section">
     <button class="celebrate-btn" id="celebrateBtn">🥂 &nbsp; Celebrate with Us</button>
+    <p class="toast-note">May every day feel like a celebration</p>
+  </section>
 
-  </div>
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-ornament">✦ ✦ ✦</div>
+    <div class="footer-names">James &amp; Jucil</div>
+    <div class="footer-date">15 · 05 · 2026</div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
